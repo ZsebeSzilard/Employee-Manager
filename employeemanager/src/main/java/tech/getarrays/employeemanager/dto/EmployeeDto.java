@@ -9,5 +9,5 @@ public class EmployeeDto {
     private String email;
     private String jobTitle;
     private String phone;
-    private String imageURl;
+    private String imageUrl;
 }
