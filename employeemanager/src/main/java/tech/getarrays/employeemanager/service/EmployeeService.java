@@ -32,8 +32,8 @@ public class EmployeeService {
         return mapToDTOList(employeeRepo.findAll());
     }
 
-    public  Employee updateEmployee(Employee employee){
-        return employeeRepo.save(employee);
+    public  EmployeeDto updateEmployee(Employee employee){
+        return mapToDTO(employeeRepo.save(employee));
     }
 
     public EmployeeDto findEmployeeById(Long id){
