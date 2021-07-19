@@ -42,8 +42,9 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(Long id){
-        Employee employee = mapToEntity(findEmployeeById(id));
-        employeeRepo.delete(employee);
+        //Employee employee = mapToEntity(findEmployeeById(id));
+        //employeeRepo.delete(employee);
+        employeeRepo.deleteEmployeeById(id);
     }
 
     public List<EmployeeDto> mapToDTOList(List<Employee> employeeList){

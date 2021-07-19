@@ -49,8 +49,6 @@ public class EmployeeServiceTest {
         mockMvc = MockMvcBuilders.standaloneSetup(employeeService).build();
     }
 
-
-
     @Test
     public void findAllEmployees() throws Exception {
         List<EmployeeDto> employeeDtoList = getMockEmployeeDtoList();
@@ -64,10 +62,10 @@ public class EmployeeServiceTest {
     @Test
     public void addEmployee() {
         EmployeeDto employeeDto = getMockEmployeeDto(1L);
-        Employee employee = getMockEmployee(3L);
+        Employee employee = getMockEmployee(1L);
 
-        when(modelMapper.map(any(EmployeeDto.class), eq(Employee.class))).thenReturn(new Employee());
-        when(employeeRepo.save(any(Employee.class))).thenReturn(new Employee());
+        when(modelMapper.map(any(EmployeeDto.class), eq(Employee.class))).thenReturn(employee);
+        when(employeeRepo.save(any(Employee.class))).thenReturn(employee);
         when(modelMapper.map(any(Employee.class), eq(EmployeeDto.class))).thenReturn(employeeDto);
         EmployeeDto response = employeeService.addEmployee(employee);
         verify(employeeRepo).save(any(Employee.class));
@@ -77,8 +75,8 @@ public class EmployeeServiceTest {
 
     @Test
     public void updateEmployee() {
-        EmployeeDto employeeDto = getMockEmployeeDto(100L);
-        Employee employee = getMockEmployee(100L);
+        EmployeeDto employeeDto = getMockEmployeeDto(1);
+        Employee employee = getMockEmployee(1L);
 
         when(employeeRepo.save(any(Employee.class))).thenReturn(employee);
         when(modelMapper.map(employeeDto, Employee.class)).thenReturn(employee);
@@ -90,48 +88,21 @@ public class EmployeeServiceTest {
 
     @Test
     public void findEmployeeById() {
-        EmployeeDto employeeDto = getMockEmployeeDto(100L);
-        Employee employee = getMockEmployee(100L);
+        EmployeeDto employeeDto = getMockEmployeeDto(1L);
+        Employee employee = getMockEmployee(1L);
 
         when(employeeRepo.findEmployeeById(anyLong())).thenReturn(Optional.of(employee));
         when(modelMapper.map(employee,EmployeeDto.class)).thenReturn(employeeDto);
 
-        EmployeeDto result = employeeService.findEmployeeById(100L);
+        EmployeeDto result = employeeService.findEmployeeById(1L);
         assertEquals(employeeDto,result);
     }
 
     @Test
     public void deleteEmployee() {
         Employee employee = getMockEmployee(1L);
-
-        //employeeService.addEmployee(employee);
-
         employeeService.deleteEmployee(employee.getId());
-
-        verify(employeeRepo, times(1)).delete(employee);
-    }
-
-    @Test
-    public void mapToDTOList() {
-
-    }
-
-    @Test
-    public void mapToDTO() {
-        Employee employee = getMockEmployee(1L);
-
-        EmployeeDto employeeDto = employeeService.mapToDTO(employee);
-
-        assertEquals(employee.getId(),employeeDto.getId());
-        assertEquals(employee.getEmail(),employeeDto.getEmail());
-        assertEquals(employee.getName(),employeeDto.getName());
-        assertEquals(employee.getImageUrl(),employeeDto.getImageUrl());
-        assertEquals(employee.getJobTitle(),employeeDto.getJobTitle());
-        assertEquals(employee.getPhone(),employeeDto.getPhone());
-    }
-
-    @Test
-    public void mapToEntity() {
+        verify(employeeRepo).deleteEmployeeById(employee.getId());
     }
 
 
