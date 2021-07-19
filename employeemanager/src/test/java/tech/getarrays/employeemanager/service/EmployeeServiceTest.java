@@ -2,11 +2,10 @@ package tech.getarrays.employeemanager.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,9 +28,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
 public class EmployeeServiceTest {
-
-
 
     private MockMvc mockMvc;
     private ObjectMapper objectMapper;
@@ -104,7 +102,6 @@ public class EmployeeServiceTest {
         employeeService.deleteEmployee(employee.getId());
         verify(employeeRepo).deleteEmployeeById(employee.getId());
     }
-
 
     private Employee getMockEmployee(long id){
         Employee employee = new Employee();

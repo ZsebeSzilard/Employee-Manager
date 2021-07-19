@@ -7,6 +7,7 @@ import tech.getarrays.employeemanager.dto.EmployeeDto;
 import tech.getarrays.employeemanager.entity.Employee;
 import tech.getarrays.employeemanager.service.EmployeeService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -43,6 +44,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(HttpStatus.OK);

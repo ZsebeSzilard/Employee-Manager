@@ -38,8 +38,6 @@ public class EmployeeControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(employeeController).build();
     }
 
-
-
     @org.junit.Test
     public void getAllEmployees() throws Exception {
         List<EmployeeDto> employeeDtoList = getMockEmployeeDtoList();
@@ -123,9 +121,6 @@ public class EmployeeControllerTest {
                 .andExpect(status().isOk());
         verify(employeeService, times(1)).deleteEmployee(id);
     }
-
-
-
 
     private Employee getMockEmployee(long id){
         Employee employee = new Employee();
